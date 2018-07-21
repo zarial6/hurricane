@@ -1,7 +1,8 @@
-package com.project.projectx.service;
+package com.hurricane.movie.service.impl;
 
-import com.project.projectx.model.Movie;
-import com.project.projectx.repository.MovieRepository;
+import com.hurricane.movie.repository.MovieRepository;
+import com.hurricane.movie.model.Movie;
+import com.hurricane.movie.service.MovieService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -10,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class MovieServiceImpl implements MovieService{
+public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
@@ -26,18 +27,15 @@ public class MovieServiceImpl implements MovieService{
         movieRepository.findAll();
         return movies;
 
-
-
     }
 
     @Override
-    public Movie findById(String id) {
-        Mono<Movie> movie = movieRepository.findById(id);
-        return movie.block();
+    public Mono<Movie> findById(String id) {
+        return movieRepository.findById(id);
     }
 
     @Override
-    public Movie saveMovie(Movie movie) {
+    public Mono<Movie> saveMovie(Movie movie) {
         return null;
     }
 }

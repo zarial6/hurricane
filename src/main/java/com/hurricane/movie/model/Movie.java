@@ -1,28 +1,19 @@
-package com.project.projectx.model;
+package com.hurricane.movie.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Movie {
-
-    @Id
-    private String id;
+public class Movie extends BaseEntity {
 
     private String title;
-
-
-
-
 
 }
