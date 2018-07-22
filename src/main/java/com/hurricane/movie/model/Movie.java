@@ -15,5 +15,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Movie extends BaseEntity {
 
     private String title;
+    private String director;
+    private String year;
+    private String rating;
 
 }

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectxApplication {
+public class HurricaneMovieApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectxApplication.class, args);
+		SpringApplication.run(HurricaneMovieApplication.class, args);
 	}
 }
