@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    /*private UserService userService;
     private UserToDtoConverter userToDtoConverter;
 
     public UserController(UserService userService, UserToDtoConverter userToDtoConverter) {
@@ -29,5 +29,5 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<Mono<UserDto>> create(@RequestBody Mono<UserDto> userDtoMono) {
         return ResponseEntity.ok(userToDtoConverter.convert(userService.create(userDtoMono)));
-    }
+    }*/
 }
