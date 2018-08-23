@@ -2,7 +2,7 @@ package com.hurricane.movie.controller;
 
 
 
-
+/*
 import com.hurricane.movie.converter.MovieToDtoConverter;
 import com.hurricane.movie.dto.MovieDto;
 import com.hurricane.movie.model.Movie;
@@ -49,3 +49,4 @@ public class MovieController {
 
 
 }
+*/

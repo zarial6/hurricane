@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class MovieToDtoConverter implements Converter<Mono<Movie>, Mono<MovieDto>> {
+public class MovieToDtoConverter implements Converter<Movie, Mono<MovieDto>> {
 
 
     @Override
-    public Mono<MovieDto> convert(Mono<Movie> movieMono) {
-        return movieMono.map(movie -> {
+    public Mono<MovieDto> convert(Movie movie) {
+
                 MovieDto movieDto = MovieDto.builder()
                         .title(movie.getTitle())
                         .director(movie.getDirector())
@@ -22,7 +22,7 @@ public class MovieToDtoConverter implements Converter<Mono<Movie>, Mono<MovieDto
                         .build();
                 movieDto.setId(movie.getId());
 
-                return movieDto;
-        });
+                return Mono.just(movieDto);
+
     }
 }
