@@ -1,6 +1,6 @@
-package com.hurricane.movie.repository;
+package com.hurricane.mindmap.repository;
 
-import com.hurricane.movie.model.User;
+import com.hurricane.mindmap.model.User;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 public interface UserRepository extends ReactiveMongoRepository<User, String> {

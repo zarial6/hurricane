@@ -1,4 +1,4 @@
-package com.hurricane.movie.dto;
+package com.hurricane.mindmap.dto;
 
 import lombok.*;
 

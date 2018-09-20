@@ -1,16 +1,7 @@
-package com.hurricane.movie.controller;
+package com.hurricane.mindmap.controller;
 
-import com.hurricane.movie.converter.UserToDtoConverter;
-import com.hurricane.movie.dto.UserDto;
-import com.hurricane.movie.model.User;
-import com.hurricane.movie.service.UserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
-
-@Controller
-@RequestMapping("/user")
+/*@Controller
+@RequestMapping("/user")*/
 public class UserController {
 
     /*private UserService userService;

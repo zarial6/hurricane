@@ -1,18 +1,19 @@
-package com.hurricane.movie.handler;
+package com.hurricane.mindmap.handler;
 
-import com.hurricane.movie.converter.UserToDtoConverter;
-import com.hurricane.movie.dto.UserDto;
-import com.hurricane.movie.model.User;
-import com.hurricane.movie.service.UserService;
+import com.hurricane.mindmap.converter.UserToDtoConverter;
+import com.hurricane.mindmap.dto.UserDto;
+import com.hurricane.mindmap.service.UserService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 import static org.springframework.web.reactive.function.server.ServerResponse.*;
+import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 
 /**
  * @author Oleg Zhymolokhov (oleg.zhimolokhov@dataart.com)
@@ -30,7 +31,7 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> getById(ServerRequest request) {
-        return request.queryParam("id")
+        return Optional.of(request.pathVariable("id"))
                 .map(userService::getById)
                 .map(user -> ok().contentType(APPLICATION_JSON)
                         .body(fromPublisher(user.flatMap(userToDtoConverter::convert), UserDto.class))
@@ -45,11 +46,24 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> create(ServerRequest request) {
-        Mono<UserDto> dtoMono = request.bodyToMono(UserDto.class);
-        Mono<User> userMono = userService.create(dtoMono);
-        return userMono.flatMap(user -> created(UriComponentsBuilder.fromPath("user/".concat(user.getId())).build().toUri())
+        return userService.create(request.bodyToMono(UserDto.class))
+                .flatMap(user -> created(fromPath("user/".concat(user.getId())).build().toUri())
+                        .contentType(APPLICATION_JSON)
+                        .body(fromPublisher(userToDtoConverter.convert(user), UserDto.class))
+                ).switchIfEmpty(notFound().build());
+    }
+
+    public Mono<ServerResponse> update(ServerRequest request) {
+        return userService.update(request.bodyToMono(UserDto.class))
+                .flatMap(createdUser -> created(fromPath("user/".concat(createdUser.getId())).build().toUri())
                 .contentType(APPLICATION_JSON)
-                .body(fromPublisher(userMono.flatMap(userToDtoConverter::convert), UserDto.class))
+                .body(fromPublisher(userToDtoConverter.convert(createdUser), UserDto.class))
         ).switchIfEmpty(notFound().build());
+    }
+
+    public Mono<ServerResponse> delete(ServerRequest request) {
+        return noContent()
+                .build(userService.delete(request.pathVariable("id")))
+                .switchIfEmpty(notFound().build());
     }
 }

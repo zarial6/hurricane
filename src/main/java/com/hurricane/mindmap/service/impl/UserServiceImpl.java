@@ -1,10 +1,10 @@
-package com.hurricane.movie.service.impl;
+package com.hurricane.mindmap.service.impl;
 
-import com.hurricane.movie.converter.UserDtoToEntityConverter;
-import com.hurricane.movie.dto.UserDto;
-import com.hurricane.movie.model.User;
-import com.hurricane.movie.repository.UserRepository;
-import com.hurricane.movie.service.UserService;
+import com.hurricane.mindmap.converter.UserDtoToEntityConverter;
+import com.hurricane.mindmap.dto.UserDto;
+import com.hurricane.mindmap.model.User;
+import com.hurricane.mindmap.repository.UserRepository;
+import com.hurricane.mindmap.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -30,13 +30,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Mono<User> create(Mono<UserDto> dtoMono) {
         return converter.convert(dtoMono)
-                .flatMap(user -> userRepository.insert(user));
+                .flatMap(userRepository::insert);
     }
 
     @Override
     public Mono<User> update(Mono<UserDto> dtoMono) {
-        return converter.convert(dtoMono)
-                .flatMap(user -> userRepository.save(user));
+        return dtoMono.map(UserDto::getId)
+                .map(this::getById)
+                .filterWhen(Mono::hasElement)
+                .flatMap(existingUser -> converter.convert(dtoMono).flatMap(userRepository::save));
     }
 
     @Override

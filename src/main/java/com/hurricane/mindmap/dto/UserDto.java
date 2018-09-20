@@ -1,20 +1,17 @@
-package com.hurricane.movie.model;
+package com.hurricane.mindmap.dto;
 
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User extends BaseEntity {
+public class UserDto extends BaseDto {
 
     private String firstName;
     private String lastName;
     private String email;
     private String login;
     private String password;
-
 }

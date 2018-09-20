@@ -1,7 +1,7 @@
-package com.hurricane.movie.converter;
+package com.hurricane.mindmap.converter;
 
-import com.hurricane.movie.dto.UserDto;
-import com.hurricane.movie.model.User;
+import com.hurricane.mindmap.dto.UserDto;
+import com.hurricane.mindmap.model.User;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;

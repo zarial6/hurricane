@@ -1,7 +1,7 @@
-package com.hurricane.movie.service;
+package com.hurricane.mindmap.service;
 
 
-import com.hurricane.movie.model.Movie;
+import com.hurricane.mindmap.model.Movie;
 import reactor.core.publisher.Mono;
 
 

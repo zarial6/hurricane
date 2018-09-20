@@ -1,8 +1,8 @@
-package com.hurricane.movie.service.impl;
+package com.hurricane.mindmap.service.impl;
 
-import com.hurricane.movie.repository.MovieRepository;
-import com.hurricane.movie.model.Movie;
-import com.hurricane.movie.service.MovieService;
+import com.hurricane.mindmap.repository.MovieRepository;
+import com.hurricane.mindmap.model.Movie;
+import com.hurricane.mindmap.service.MovieService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

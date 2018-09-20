@@ -1,7 +1,7 @@
-package com.hurricane.movie.service;
+package com.hurricane.mindmap.service;
 
-import com.hurricane.movie.dto.UserDto;
-import com.hurricane.movie.model.User;
+import com.hurricane.mindmap.dto.UserDto;
+import com.hurricane.mindmap.model.User;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

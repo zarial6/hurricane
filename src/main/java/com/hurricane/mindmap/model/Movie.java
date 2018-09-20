@@ -1,9 +1,8 @@
-package com.hurricane.movie.model;
+package com.hurricane.mindmap.model;
 
 
 import lombok.*;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = true)

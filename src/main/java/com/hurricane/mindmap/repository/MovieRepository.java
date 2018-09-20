@@ -1,7 +1,7 @@
-package com.hurricane.movie.repository;
+package com.hurricane.mindmap.repository;
 
 
-import com.hurricane.movie.model.Movie;
+import com.hurricane.mindmap.model.Movie;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 

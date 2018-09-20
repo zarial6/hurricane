@@ -1,4 +1,4 @@
-package com.hurricane.movie.model;
+package com.hurricane.mindmap.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
