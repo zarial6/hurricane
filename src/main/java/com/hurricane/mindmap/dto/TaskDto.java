@@ -1,6 +1,5 @@
 package com.hurricane.mindmap.dto;
 
-
 import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
@@ -14,6 +13,4 @@ public class TaskDto extends BaseDto {
     private String director;
     private String year;
     private String rating;
-
-
 }
