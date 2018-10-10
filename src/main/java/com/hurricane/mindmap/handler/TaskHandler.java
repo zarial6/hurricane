@@ -3,11 +3,8 @@ package com.hurricane.mindmap.handler;
 
 import com.hurricane.mindmap.converter.TaskToDtoConverter;
 import com.hurricane.mindmap.dto.TaskDto;
-import com.hurricane.mindmap.dto.UserDto;
 import com.hurricane.mindmap.model.Task;
 import com.hurricane.mindmap.service.TaskService;
-
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -44,22 +41,18 @@ public class TaskHandler {
                 ).orElse(badRequest().build());
     }
 
-    public Mono<ServerResponse> findAll(ServerRequest request) {
-        return ok().contentType(APPLICATION_JSON)
-                .body(fromPublisher(taskService.findAll(), Task.class));
-
-    }
 
     public Mono<ServerResponse> create(ServerRequest request) {
-        Mono<TaskDto> movieDtoMono = request.bodyToMono(TaskDto.class);
-        Mono<Task> movieMono = taskService.create(movieDtoMono);
-        return movieMono.flatMap(movie -> created(UriComponentsBuilder.fromPath("/movie".concat(movie.getId())).build().toUri())
+        Mono<TaskDto> taskDtoMono = request.bodyToMono(TaskDto.class);
+        Mono<Task> taskMono = taskService.create(taskDtoMono);
+        return taskMono.flatMap(movie -> created(UriComponentsBuilder.fromPath("/movie".concat(movie.getId())).build().toUri())
                 .contentType(APPLICATION_JSON)
-                .body(fromPublisher(movieMono.flatMap(taskToDtoConverter::convert), TaskDto.class))
+                .body(fromPublisher(taskMono.flatMap(taskToDtoConverter::convert), TaskDto.class))
                 .switchIfEmpty(notFound().build()));
 
 
     }
+
     public Mono<ServerResponse> update(ServerRequest request) {
         return taskService.update(request.bodyToMono(TaskDto.class))
                 .flatMap(createdTask -> created(fromPath("task/".concat(createdTask.getId())).build().toUri())
@@ -67,6 +60,7 @@ public class TaskHandler {
                         .body(fromPublisher(taskToDtoConverter.convert(createdTask), TaskDto.class))
                 ).switchIfEmpty(notFound().build());
     }
+
     public Mono<ServerResponse> delete(ServerRequest request) {
         return noContent()
                 .build(taskService.delete(request.pathVariable("id")))

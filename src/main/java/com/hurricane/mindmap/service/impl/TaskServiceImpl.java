@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.HashSet;
-
-import java.util.Set;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -21,23 +18,13 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
     }
 
-
     @Override
-    public Set<Task> getMovie() {
-
-        Set<Task> tasks = new HashSet<>();
-        taskRepository.findAll();
-        return tasks;
-
+    public Mono<Task> update(Mono<TaskDto> dtoMono) {
+        return null;
     }
 
     @Override
-    public Mono<Task> findById(String id) {
-        return taskRepository.findById(id);
-    }
-
-    @Override
-    public Mono<Task> saveMovie(Task task) {
+    public Mono<Void> delete(String id) {
         return null;
     }
 

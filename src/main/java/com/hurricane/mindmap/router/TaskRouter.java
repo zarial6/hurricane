@@ -1,6 +1,7 @@
 package com.hurricane.mindmap.router;
 
 import com.hurricane.mindmap.handler.TaskHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
@@ -12,6 +13,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration
 public class TaskRouter {
 
+    @Bean
     public RouterFunction<ServerResponse> route(TaskHandler taskHandler)
     {
         return RouterFunctions.route(GET("/tasks{id}").and(accept(APPLICATION_JSON)), taskHandler::getById)

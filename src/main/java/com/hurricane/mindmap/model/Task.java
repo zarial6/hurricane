@@ -14,8 +14,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Task extends BaseEntity {
 
     private String title;
-    private String director;
-    private String year;
-    private String rating;
+
 
 }

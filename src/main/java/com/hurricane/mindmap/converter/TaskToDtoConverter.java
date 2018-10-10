@@ -14,15 +14,12 @@ public class TaskToDtoConverter implements Converter<Task, Mono<TaskDto>> {
     @Override
     public Mono<TaskDto> convert(Task task) {
 
-        TaskDto movieDto = TaskDto.builder()
+        TaskDto taskDto = TaskDto.builder()
                 .title(task.getTitle())
-                .director(task.getDirector())
-                .year(task.getYear())
-                .rating(task.getRating())
                 .build();
-        movieDto.setId(task.getId());
+        taskDto.setId(task.getId());
 
-        return Mono.just(movieDto);
+        return Mono.just(taskDto);
 
     }
 }

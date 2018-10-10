@@ -10,13 +10,10 @@ import reactor.core.publisher.Mono;
 public class TaskDtoToEntityConverter implements Converter<Mono<TaskDto>, Mono<Task>> {
 
     @Override
-    public Mono<Task> convert(Mono<TaskDto> movieDtoMono) {
-        return movieDtoMono.map(movieDto -> {
+    public Mono<Task> convert(Mono<TaskDto> taskDtoMono) {
+        return taskDtoMono.map(taskDto -> {
             Task task = Task.builder()
-                    .title(movieDto.getTitle())
-                    .director(movieDto.getDirector())
-                    .year(movieDto.getYear())
-                    .rating(movieDto.getRating())
+                    .title(taskDto.getTitle())
                     .build();
             task.setId(task.getId());
 
@@ -26,5 +23,6 @@ public class TaskDtoToEntityConverter implements Converter<Mono<TaskDto>, Mono<T
     }
 
 }
+
 
 

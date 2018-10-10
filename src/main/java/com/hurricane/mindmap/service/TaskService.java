@@ -7,13 +7,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
-
 public interface TaskService {
 
     Mono<Task> update(Mono<TaskDto> dtoMono);
 
     Mono<Void> delete(String id);
-
 
     Mono<Task> getById(String id);
 
