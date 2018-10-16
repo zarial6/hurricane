@@ -1,12 +1,13 @@
 package com.hurricane.mindmap.security;
 
-
+/*
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     String user = "user";
-    String pasword = "password";
+    String password = "password";
 
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
 
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        String encodedPassword = passwordEncoder().encode(pasword);
+        String encodedPassword = passwordEncoder().encode(password);
         manager.createUser(User.withUsername(user).password(encodedPassword).roles("USER").build());
 
 
@@ -48,3 +49,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 }
+*/
