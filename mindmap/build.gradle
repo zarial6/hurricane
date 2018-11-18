@@ -1,0 +1,33 @@
+plugins {
+    id "java"
+    id "org.springframework.boot"
+    id "io.spring.dependency-management"
+    id "idea"
+}
+
+configurations {
+    providedRuntime
+}
+
+version '0.1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb-reactive"
+    compileOnly "org.projectlombok:lombok:1.16.8"
+    compile "io.projectreactor:reactor-core:$reactorCoreVersion"
+    compile "org.springframework.boot:spring-boot-starter-webflux"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+}
+
+/*lombok {
+    version = "1.16.18"
+    sha256 = ""
+}*/
+
