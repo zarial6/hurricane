@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-
 @Service
 public class TaskServiceImpl implements TaskService {
 
@@ -23,18 +22,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Mono<Task> update(Mono<TaskDto> dtoMono) {
-        return dtoMono.map(TaskDto::getId)
-                .map(this::getById)
-                .filterWhen(Mono::hasElement)
-                .flatMap(existingTask -> converter.convert(dtoMono).flatMap(taskRepository::save));
-    }
-
-    @Override
-    public Mono<Void> delete(String id) {
-        return taskRepository.findById(id)
-                .map(taskRepository::delete)
-                .then();
+    public Flux<Task> findAll() {
+        return taskRepository.findAll();
     }
 
     @Override
@@ -43,13 +32,23 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Flux<Task> findAll() {
-        return taskRepository.findAll();
+    public Mono<Task> create(Mono<TaskDto> dtoMono) {
+        return dtoMono.map(converter::convert)
+                .flatMap(taskRepository::insert);
     }
 
     @Override
-    public Mono<Task> create(Mono<TaskDto> dtoMono) {
-        return converter.convert(dtoMono)
-                .flatMap(taskRepository::insert);
+    public Mono<Task> update(Mono<TaskDto> dtoMono) {
+        return dtoMono.flatMap(dto -> this.getById(dto.getId())
+                .map(existingTask -> converter.convert(dto))
+                .flatMap(taskRepository::save)
+        );
+    }
+
+    @Override
+    public Mono<Void> delete(String id) {
+        return taskRepository.findById(id)
+                .map(taskRepository::delete)
+                .then();
     }
 }

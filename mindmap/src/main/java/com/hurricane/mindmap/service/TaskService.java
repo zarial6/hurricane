@@ -9,13 +9,13 @@ import reactor.core.publisher.Mono;
 
 public interface TaskService {
 
-    Mono<Task> update(Mono<TaskDto> dtoMono);
-
-    Mono<Void> delete(String id);
+    Flux<Task> findAll();
 
     Mono<Task> getById(String id);
 
-    Flux<Task> findAll();
-
     Mono<Task> create(Mono<TaskDto> dtoMono);
+
+    Mono<Task> update(Mono<TaskDto> dtoMono);
+
+    Mono<Void> delete(String id);
 }

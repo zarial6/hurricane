@@ -3,12 +3,18 @@ package com.hurricane.mindmap.router;
 import com.hurricane.mindmap.handler.UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-
-import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static com.hurricane.mindmap.router.RouterHelper.acceptJson;
+import static com.hurricane.mindmap.router.RouterHelper.cTypeJson;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
 /**
@@ -18,11 +24,14 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 public class UserRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> route(UserHandler userHandler) {
-        return RouterFunctions.route(GET("/users/{id}").and(accept(APPLICATION_JSON)), userHandler::getById)
-                .andRoute(GET("/users").and(accept(APPLICATION_JSON)), userHandler::all)
-                .andRoute(POST("/users").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)), userHandler::create)
-                .andRoute(PUT("/users").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)), userHandler::update)
-                .andRoute(DELETE("/users/{id}"), userHandler::delete);
+    public RouterFunction<ServerResponse> routeUsers(UserHandler userHandler) {
+        return RouterFunctions.nest(
+                RequestPredicates.path("/users"),
+                RouterFunctions.route(GET("/{id}").and(acceptJson()), userHandler::getById)
+                        .andRoute(method(GET).and(acceptJson()), userHandler::all)
+                        .andRoute(method(POST).and(acceptJson()).and(cTypeJson()), userHandler::create)
+                        .andRoute(method(PUT).and(acceptJson()).and(cTypeJson()), userHandler::update)
+                        .andRoute(DELETE("/{id}"), userHandler::delete)
+        );
     }
 }
