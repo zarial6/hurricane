@@ -5,14 +5,23 @@ import lombok.*;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Duration;
+
+@Document
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Document
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Movie extends BaseEntity {
+public class Task extends BaseEntity {
 
     private String title;
 
+    /*private Duration estimate;
+
+    private String description;
+
+    private String creatorId;
+
+    private String assigneeId;*/
 }
